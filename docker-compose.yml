@@ -2,12 +2,16 @@ version: "3.7"
 services:
   app:
     image: ametdoohan/tixam
+    container_name: tixam-app
+    restart: unless-stopped
     ports:
       - 8083:80
     networks:
       - tixamnet
   db:
     image: mysql:5.7
+    container_name: tixam-db
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -26,3 +30,4 @@ volumes:
 
 networks:
   tixamnet:
+    driver: bridge
