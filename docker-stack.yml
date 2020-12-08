@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  app:
+    image: ametdoohan/tixam
+    ports:
+      - 8083:80
+      
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - tixam_db:/var/lib/mysql
+
+volumes:
+  tixam_db:
