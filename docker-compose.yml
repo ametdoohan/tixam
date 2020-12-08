@@ -4,12 +4,10 @@ services:
     image: ametdoohan/tixam
     container_name: tixam-app
     restart: unless-stopped
-    working_dir: /app
-    networks:
-      - tixamnet
     ports:
       - 8083:80
-
+    networks:
+      - tixamnet
   db:
     image: mysql:5.7
     container_name: tixam-db
@@ -23,8 +21,12 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - tixam_db:/var/lib/mysql
     networks:
       - tixamnet
+
+volumes:
+  tixam_db:
 
 networks:
   tixamnet:
