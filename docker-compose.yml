@@ -26,4 +26,3 @@ volumes:
 
 networks:
   tixamnet:
-    driver: bridge
